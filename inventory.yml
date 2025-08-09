@@ -1,0 +1,17 @@
+public:
+  hosts:
+    bweston.uk:
+      ansible_host: bweston.uk
+    uptime:
+      ansible_host: uptime.bweston.uk
+private:
+  hosts:
+    iptv:
+      ansible_host: iptv.lan
+    proxmox:
+      ansible_host: proxmox.lan
+      ansible_ssh_user: root
+    turntable:
+      ansible_host: turntable.lan
+  vars:
+    ansible_ssh_common_args: "-J ben@bweston.uk"

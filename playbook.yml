@@ -1,0 +1,21 @@
+- name: update
+  hosts: all
+  strategy: free
+  tasks:
+    - name: Upgrade packages
+      become: true
+      apt:
+        update_cache: true
+        upgrade: full
+        autoremove: true
+    - name: Reboot if required
+      shell: /sbin/shutdown -r now 'Rebooting due to updated libs/kernel'
+      args:
+        removes: /var/run/reboot-required
+      async: 300
+      poll: 0
+      ignore_errors: true
+    - name: Wait for system to become reachable
+      wait_for_connection:
+        delay: 60
+        timeout: 300
