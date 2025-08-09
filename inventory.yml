@@ -1,9 +1,6 @@
-public:
-  hosts:
-    bweston.uk:
-      ansible_host: bweston.uk
-    uptime:
-      ansible_host: uptime.bweston.uk
+proxmox_all_running:
+  vars:
+    ansible_ssh_user: root
 private:
   hosts:
     iptv:
@@ -13,5 +10,25 @@ private:
       ansible_ssh_user: root
     turntable:
       ansible_host: turntable.lan
+  children:
+    proxmox_all_running:
   vars:
     ansible_ssh_common_args: "-J ben@bweston.uk"
+public:
+  children:
+    jump_host:
+  hosts:
+    uptime:
+      ansible_host: uptime.bweston.uk
+jump_host:
+  hosts:
+    bweston.uk:
+      ansible_host: bweston.uk
+control_node:
+  hosts:
+    local:
+      ansible_host: localhost
+all_running:
+  children:
+    public:
+    private:

@@ -1,0 +1,19 @@
+---
+- name: Upgrade packages
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+    upgrade: full
+    autoremove: true
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Check if reboot is required
+  stat:
+    path: /var/run/reboot-required
+  register: reboot_required
+- name: Reboot if required
+  become: true
+  ansible.builtin.reboot:
+    msg: "Rebooting due to updated libs/kernel"
+  register: result
+  when: reboot_required.stat.exists
