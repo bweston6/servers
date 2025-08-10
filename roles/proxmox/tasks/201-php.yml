@@ -1,0 +1,41 @@
+---
+- name: Create PHP LXC
+  community.general.proxmox:
+    vmid: 201
+    api_host: "{{ proxmox_api_host }}"
+    api_token_id: "{{ proxmox_api_token_id }}"
+    api_token_secret: "{{ proxmox_api_token_secret }}"
+    api_user: "{{ proxmox_api_user }}"
+    hostname: php
+    node: "{{ proxmox_node }}"
+    ostemplate: "local:vztmpl/debian-12-standard_12.7-1_amd64.tar.zst"
+    password: "{{ root_password }}"
+    pubkey: "{{ ssh_public_key }}"
+    storage: local-lvm
+- name: Define PHP LXC
+  community.general.proxmox:
+    vmid: 201
+    api_host: "{{ proxmox_api_host }}"
+    api_token_id: "{{ proxmox_api_token_id }}"
+    api_token_secret: "{{ proxmox_api_token_secret }}"
+    api_user: "{{ proxmox_api_user }}"
+    hostname: php
+    memory: 512
+    netif:
+      net0: "name=eth0,ip=dhcp,ip6=dhcp,bridge=vmbr0"
+    node: "{{ proxmox_node }}"
+    onboot: true
+    ostype: debian
+    update: true
+- name: Start PHP LXC
+  community.general.proxmox:
+    vmid: 201
+    api_host: "{{ proxmox_api_host }}"
+    api_token_id: "{{ proxmox_api_token_id }}"
+    api_token_secret: "{{ proxmox_api_token_secret }}"
+    api_user: "{{ proxmox_api_user }}"
+    node: "{{ proxmox_node }}"
+    state: started
+  register: start_result
+  retries: 5
+  until: start_result is success

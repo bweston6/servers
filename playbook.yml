@@ -6,6 +6,9 @@
   strategy: free
   roles:
     - common
+- hosts: proxmox
+  roles:
+    - proxmox
 - hosts: jump_host
   roles:
     - common

@@ -1,3 +1,4 @@
+---
 plugin: community.general.proxmox
 qemu_extended_statuses: true
 token_id: ansible

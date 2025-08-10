@@ -1,3 +1,4 @@
+---
 proxmox_all_running:
   vars:
     ansible_ssh_user: root
