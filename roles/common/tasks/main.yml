@@ -1,11 +1,17 @@
 ---
-- name: Upgrade packages
+- name: Upgrade apt packages
   become: true
   ansible.builtin.apt:
     update_cache: true
     upgrade: full
     autoremove: true
   when: ansible_facts['os_family'] == "Debian"
+
+- name: Upgrade brew packages
+  community.general.homebrew:
+    update_homebrew: true
+    upgrade_all: true
+  when: ansible_facts['os_family'] == "Darwin"
 
 - name: Check if reboot is required
   stat:

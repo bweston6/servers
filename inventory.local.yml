@@ -1,0 +1,4 @@
+control_node:
+  hosts:
+    local:
+      ansible_host: localhost
