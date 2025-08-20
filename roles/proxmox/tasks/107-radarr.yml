@@ -1,6 +1,6 @@
 ---
 - name: Create Radarr LXC
-  community.general.proxmox:
+  community.proxmox.proxmox:
     vmid: 107
     api_host: "{{ proxmox_api_host }}"
     api_token_id: "{{ proxmox_api_token_id }}"
@@ -13,7 +13,7 @@
     pubkey: "{{ ssh_public_key }}"
     storage: local-lvm
 - name: Define Radarr LXC
-  community.general.proxmox:
+  community.proxmox.proxmox:
     vmid: 107
     api_host: "{{ proxmox_api_host }}"
     api_token_id: "{{ proxmox_api_token_id }}"
@@ -30,7 +30,7 @@
     ostype: debian
     update: true
 - name: Start Radarr LXC
-  community.general.proxmox:
+  community.proxmox.proxmox:
     vmid: 107
     api_host: "{{ proxmox_api_host }}"
     api_token_id: "{{ proxmox_api_token_id }}"

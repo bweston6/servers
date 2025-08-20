@@ -1,6 +1,6 @@
 ---
 - name: Create Home Assistant VM
-  community.general.proxmox_kvm:
+  community.proxmox.proxmox_kvm:
     acpi: true
     api_host: "{{ proxmox_api_host }}"
     api_token_id: "{{ proxmox_api_token_id }}"

@@ -1,6 +1,6 @@
 ---
 - name: Create Emby LXC
-  community.general.proxmox:
+  community.proxmox.proxmox:
     api_host: "{{ proxmox_api_host }}"
     api_token_id: "{{ proxmox_api_token_id }}"
     api_token_secret: "{{ proxmox_api_token_secret }}"
@@ -13,7 +13,7 @@
     storage: local-lvm
     vmid: 101
 - name: Define Emby LXC
-  community.general.proxmox:
+  community.proxmox.proxmox:
     vmid: 101
     api_host: "{{ proxmox_api_host }}"
     api_token_id: "{{ proxmox_api_token_id }}"
@@ -30,7 +30,7 @@
     ostype: debian
     update: true
 - name: Start Emby LXC
-  community.general.proxmox:
+  community.proxmox.proxmox:
     vmid: 101
     api_host: "{{ proxmox_api_host }}"
     api_token_id: "{{ proxmox_api_token_id }}"

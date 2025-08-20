@@ -1,5 +1,5 @@
 ---
-plugin: community.general.proxmox
+plugin: community.proxmox.proxmox
 qemu_extended_statuses: true
 token_id: ansible
 token_secret: !vault |
