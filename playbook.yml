@@ -1,14 +1,21 @@
 ---
-- hosts: homeassistant
+# create containers
+- hosts: proxmox
   roles:
-    - homeassistant
+    - proxmox
+# updates
 - hosts: all_running:!jump_host:!homeassistant
   strategy: free
   roles:
     - common
-- hosts: proxmox
+# container-specific config
+- hosts: emby
   roles:
-    - proxmox
+    - emby
+- hosts: homeassistant
+  roles:
+    - homeassistant
+# update jump_host and control_node separately
 - hosts: jump_host
   roles:
     - common
