@@ -5,7 +5,7 @@
     - proxmox
 # updates
 - hosts: all_running:!jump_host:!homeassistant
-  strategy: free
+  # strategy: free
   roles:
     - common
 # container-specific config
