@@ -3,10 +3,10 @@
   ansible.builtin.shell: ha core update
   register: core
   failed_when:
-    - '"already installed" not in core.stdout'
+    - '"already installed" not in core.stderr and "success" not in core.stdout'
   changed_when: core.rc == 0
 - name: Update operating system
   ansible.builtin.shell: ha os update
   failed_when:
-    - '"already installed" not in core.stdout'
+    - '"already installed" not in core.stderr and "success" not in core.stdout'
   changed_when: core.rc == 0

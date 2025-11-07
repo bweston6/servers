@@ -1,7 +1,4 @@
 ---
-proxmox_all_running:
-  vars:
-    ansible_ssh_user: root
 private:
   hosts:
     iptv:
@@ -11,8 +8,12 @@ private:
       ansible_ssh_user: root
     turntable:
       ansible_host: turntable.lan
-  children:
-    proxmox_all_running:
+    storage:
+      ansible_host: storage.lan
+      ansible_ssh_user: root
+    homeassistant:
+      ansible_host: homeassistant.lan
+      ansible_ssh_user: root
   vars:
     ansible_ssh_common_args: "-J ben@bweston.uk"
 public:
@@ -23,8 +24,9 @@ public:
       ansible_host: uptime.bweston.uk
 jump_host:
   hosts:
-    bweston.uk:
+    docker:
       ansible_host: bweston.uk
+      ansible_become_method: su
 control_node:
   hosts:
     local:

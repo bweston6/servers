@@ -1,5 +1,4 @@
 ---
-# create containers
 - hosts: proxmox
   roles:
     - proxmox
@@ -8,10 +7,6 @@
   # strategy: free
   roles:
     - common
-# container-specific config
-- hosts: emby
-  roles:
-    - emby
 - hosts: homeassistant
   roles:
     - homeassistant
