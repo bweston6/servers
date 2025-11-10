@@ -13,13 +13,22 @@
     upgrade_all: true
   when: ansible_facts['os_family'] == "Darwin"
 
+- name: Install needrestart
+  become: true
+  ansible.builtin.apt:
+    name: needrestart
+  when: ansible_facts['os_family'] == "Debian"
+
 - name: Check if reboot is required
-  stat:
-    path: /var/run/reboot-required
+  become: true
+  ansible.builtin.shell: /usr/sbin/needrestart -p
   register: reboot_required
+  changed_when: false
+  failed_when: reboot_required.rc > 2
+  when: ansible_facts['os_family'] == "Debian"
+
 - name: Reboot if required
   become: true
   ansible.builtin.reboot:
     msg: "Rebooting due to updated libs/kernel"
-  register: result
-  when: reboot_required.stat.exists
+  when: reboot_required.rc != 0

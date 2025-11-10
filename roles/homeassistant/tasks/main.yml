@@ -7,6 +7,7 @@
   changed_when: core.rc == 0
 - name: Update operating system
   ansible.builtin.shell: ha os update
+  register: haos
   failed_when:
     - '"already installed" not in core.stderr and "success" not in core.stdout'
-  changed_when: core.rc == 0
+  changed_when: haos.rc == 0
